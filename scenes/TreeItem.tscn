@@ -1,0 +1,163 @@
+[gd_scene load_steps=8 format=3 uid="uid://02tmngl217jq"]
+
+[ext_resource type="Script" uid="uid://dewnlr8lecgrl" path="res://scenes/tree_item.gd" id="1_qvilc"]
+[ext_resource type="Texture2D" uid="uid://dk76ksoo8u5v6" path="res://assets/tab_image.png" id="2_o3rl2"]
+[ext_resource type="Texture2D" uid="uid://biusxd0ni722x" path="res://assets/down-arrow.png" id="2_oplbs"]
+
+[sub_resource type="Animation" id="Animation_qvilc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label3:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(500, 100)]
+}
+
+[sub_resource type="Animation" id="Animation_oplbs"]
+resource_name = "expand"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Label3:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.266667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.266667),
+"transitions": PackedFloat32Array(1, 4),
+"update": 0,
+"values": [Vector2(500, 100), Vector2(500, 220)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvilc"]
+_data = {
+&"RESET": SubResource("Animation_qvilc"),
+&"expand": SubResource("Animation_oplbs")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_qvilc"]
+font_names = PackedStringArray("Sans-Serif")
+font_italic = true
+font_weight = 999
+subpixel_positioning = 0
+
+[node name="Item" type="MarginContainer"]
+custom_minimum_size = Vector2(500, 100)
+anchors_preset = -1
+anchor_right = 0.26
+anchor_bottom = 0.093
+offset_right = 0.800018
+offset_bottom = -0.440002
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_qvilc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qvilc")
+}
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
+layout_mode = 2
+texture = ExtResource("2_o3rl2")
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/bold_font = SubResource("SystemFont_qvilc")
+bbcode_enabled = true
+text = "[b]Automated Creation & Organization of Teaching Staff's [i]'Attendance and Student Details' [/i] Spreadsheets[/b]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="MarginContainer"]
+show_behind_parent = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Designed, developed, and implemented a system that provides direct access to the teaching staff's Attendance and Student Details  and  Customer Records, Lesson Updates & Invoicing spreadsheets, including automated retrieval of spreadsheet IDs for data management."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(125, 25)
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/MarginContainer/Control"]
+custom_minimum_size = Vector2(125, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -12.5
+offset_right = 62.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(63, 19)
+size_flags_horizontal = 4
+size_flags_vertical = 10
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("2_oplbs")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="mouse_entered" from="MarginContainer/MarginContainer/Control/TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MarginContainer/Control/TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="toggled" from="MarginContainer/MarginContainer/Control/TextureButton" to="." method="_on_texture_button_toggled"]

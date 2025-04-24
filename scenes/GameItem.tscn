@@ -1,0 +1,289 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmefb44ytrndm"]
+
+[ext_resource type="Script" uid="uid://wkj0a2edmsss" path="res://scenes/game_item.gd" id="1_oh4qt"]
+[ext_resource type="Texture2D" uid="uid://dk76ksoo8u5v6" path="res://assets/tab_image.png" id="2_j8mn5"]
+[ext_resource type="Texture2D" uid="uid://biusxd0ni722x" path="res://assets/down-arrow.png" id="3_joexe"]
+[ext_resource type="Texture2D" uid="uid://byevh5iwie3o7" path="res://assets/gameicons/3d_movement.png" id="3_oh4qt"]
+
+[sub_resource type="Animation" id="Animation_qvilc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 225)]
+}
+
+[sub_resource type="Animation" id="Animation_oplbs"]
+resource_name = "expand"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1611, 225), Vector2(1611, 1000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvilc"]
+_data = {
+&"RESET": SubResource("Animation_qvilc"),
+&"expand": SubResource("Animation_oplbs")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_qvilc"]
+font_names = PackedStringArray("Sans-Serif")
+font_italic = true
+font_weight = 999
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp5nb"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8mn5"]
+bg_color = Color(0.117647, 0.117647, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_j8mn5"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(0.87451, 0.87451, 0.87451, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_wp5nb")
+Button/styles/normal = SubResource("StyleBoxFlat_j8mn5")
+
+[node name="GameItem" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 225)
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -260.0
+offset_bottom = 210.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_oh4qt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qvilc")
+}
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+modulate = Color(0.152941, 0.152941, 0.152941, 1)
+layout_mode = 2
+texture = ExtResource("2_j8mn5")
+patch_margin_left = 60
+patch_margin_top = 60
+patch_margin_right = 60
+patch_margin_bottom = 60
+
+[node name="ContentsContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ContentsContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ContentsContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_oh4qt")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ContentsContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="HSeparator2" type="HSeparator" parent="ContentsContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="ContentsContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/bold_font = SubResource("SystemFont_qvilc")
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]TEST[/b]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="General info" type="Label" parent="ContentsContainer/VBoxContainer"]
+show_behind_parent = true
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Designed, developed, and implemented a system that provides direct access to the teaching staff's Attendance and Student Details  and  Customer Records, Lesson Updates & Invoicing spreadsheets, including automated retrieval of spreadsheet IDs for data management."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ContentsContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="ContentsContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContentsContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(355, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(355, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 65
+alignment = 1
+
+[node name="General info" type="Label" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer"]
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Controls:
+Horizontal mouse movement
+Left and right click
+Escape to pause the game"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_j8mn5")
+text = "Download"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect5" type="TextureRect" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(355, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(355, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_bottom = 25
+
+[node name="Control" type="Control" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer2/Control"]
+custom_minimum_size = Vector2(125, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -12.5
+offset_right = 62.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(63, 19)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("3_joexe")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="ContentsContainer/VBoxContainer/Control/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/Control/TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer2/Control/TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="toggled" from="MarginContainer2/Control/TextureButton" to="." method="_on_texture_button_toggled"]

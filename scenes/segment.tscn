@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjo7jgyk5vg8p"]
+
+[sub_resource type="SystemFont" id="SystemFont_1t7c3"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 999
+subpixel_positioning = 0
+
+[node name="Segment" type="VBoxContainer"]
+offset_right = 105.0
+offset_bottom = 43.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_1t7c3")
+theme_override_font_sizes/font_size = 36
+text = "Test Title"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 5

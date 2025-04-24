@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b47b3d0d6b04c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjaur"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="Theme" id="Theme_bjaur"]
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_bjaur")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_bjaur")
+Button/styles/pressed = SubResource("StyleBoxFlat_bjaur")
+
+[node name="NavButton" type="Button"]
+custom_minimum_size = Vector2(125, 63)
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_bjaur")
